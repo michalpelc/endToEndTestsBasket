@@ -3,9 +3,12 @@ package page;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.Random;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class DetailedProductPage extends FluentPage {
 
@@ -19,7 +22,7 @@ public class DetailedProductPage extends FluentPage {
     @FindBy(css = "a.addToBag")
     private FluentWebElement addToBagIcon;
 
-    @FindBy(id = "ProductName")
+    @FindBy(id = "lblProductName")
     private FluentWebElement productName;
 
 
@@ -42,5 +45,10 @@ public class DetailedProductPage extends FluentPage {
             availableSizes.get(new Random().nextInt(availableSizesSize)).click();
         }
         return this;
+    }
+
+    public void verifyThatProductPageHasBeenLoaded() {
+        await().atMost(3, SECONDS).until(productPrice).displayed();
+        await().atMost(3, SECONDS).until(productName).displayed();
     }
 }
