@@ -57,5 +57,4 @@ public class MainPage extends FluentPage {
         return cartPage;
     }
 
-
 }

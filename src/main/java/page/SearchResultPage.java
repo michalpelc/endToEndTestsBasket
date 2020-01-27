@@ -32,4 +32,5 @@ public class SearchResultPage extends FluentPage {
         String message = "Your search did not match any of our products. Please try another keyword.";
         assertThat(searchNotFoundNotification).hasText(message);
     }
+
 }

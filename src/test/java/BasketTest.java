@@ -1,6 +1,5 @@
 import engine.CustomFluentDriver;
 import org.fluentlenium.core.annotation.Page;
-import org.junit.Assert;
 import org.junit.Test;
 import page.CartPage;
 import page.DetailedProductPage;
@@ -20,7 +19,7 @@ public class BasketTest extends CustomFluentDriver {
     CartPage cartPage;
 
     @Test
-    public void shouldAddItemToBasketAndCheckThatIsProperlyCalculated() {
+    public void shouldAddItemToBasketAndCheckThatIsProperlyPlaced() {
         goTo(mainPage).openFirstProductFromTheList().verifyThatProductPageHasBeenLoaded();
         String actualPrice = detailedProductPage.getProductPrice();
         String actualName = detailedProductPage.getProductName();

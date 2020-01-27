@@ -3,7 +3,6 @@ package page;
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.Random;
@@ -11,7 +10,6 @@ import java.util.Random;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class DetailedProductPage extends FluentPage {
-
 
     @FindBy(xpath = "//li[@class='tooltip sizeButtonli ']")
     private FluentList<FluentWebElement> availableSizes;
@@ -24,7 +22,6 @@ public class DetailedProductPage extends FluentPage {
 
     @FindBy(id = "lblProductName")
     private FluentWebElement productName;
-
 
     public String getProductPrice() {
         return productPrice.text();
@@ -51,4 +48,5 @@ public class DetailedProductPage extends FluentPage {
         await().atMost(3, SECONDS).until(productPrice).displayed();
         await().atMost(3, SECONDS).until(productName).displayed();
     }
+
 }
