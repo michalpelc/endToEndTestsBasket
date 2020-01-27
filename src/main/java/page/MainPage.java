@@ -1,0 +1,40 @@
+package page;
+
+import org.fluentlenium.core.FluentPage;
+import org.fluentlenium.core.annotation.PageUrl;
+import org.fluentlenium.core.domain.FluentList;
+import org.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+
+@PageUrl("https://www.sportsdirect.com/mens/mens-boots")
+public class MainPage extends FluentPage {
+
+    @FindBy(css = "#productlistcontainer a.ProductImageList")
+    private FluentList<FluentWebElement> productList;
+
+    @FindBy(css = "#productlistcontainer span.productdescriptionname")
+    private FluentList<FluentWebElement> productDescriptionList;
+
+    public static final ArrayList<String> productDescription = new ArrayList<>();
+
+    public MainPage openFirstProductFromTheList() {
+        await().until(productList).displayed();
+        clickIgnoringPopup(productList.first());
+        return this;
+    }
+
+    public void getDescriptionOfTheFirstProductFromTheList() {
+        await().until(productDescriptionList).displayed();
+        FluentWebElement firstProductDescription = productDescriptionList.first();
+        String description = firstProductDescription.text();
+        productDescription.add(description);
+    }
+
+    private void clickIgnoringPopup(FluentWebElement element) {
+        String jsScript = "arguments[0].click();";
+        ((JavascriptExecutor) getDriver()).executeScript(jsScript, element);
+    }
+}

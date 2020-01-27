@@ -1,6 +1,5 @@
 package engine;
 
-import org.apache.log4j.Logger;
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,7 +15,6 @@ import static org.openqa.selenium.remote.DesiredCapabilities.firefox;
 
 public class CustomFluentDriver extends FluentTest {
 
-    private final static Logger log = Logger.getLogger(CustomFluentDriver.class);
     private final String IS_REMOTE = getProperty("isRemote");
 
     private boolean isRemote() {
@@ -25,16 +23,12 @@ public class CustomFluentDriver extends FluentTest {
 
     @Override
     public WebDriver newWebDriver() {
-        log.info("Initializing WebDriver ... ");
         if (isRemote()) {
             try {
                 return remoteWebDriver();
-            } catch (MalformedURLException e) {
-                log.error("URL format wrong", e);
+            } catch (MalformedURLException ignored) {
             }
-            log.info("Remote FireFox driver has been initialized ... ");
         }
-        log.info("Initializing local instance of FF driver ... ");
         return new FirefoxDriver();
     }
 
